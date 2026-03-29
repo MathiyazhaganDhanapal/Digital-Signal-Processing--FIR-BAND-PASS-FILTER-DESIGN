@@ -21,29 +21,40 @@ Step 6: Terminate the program.
 ## PROGRAM: 
 ~~~
 clc; % clear screen
-clear all; % clear screen
+clear all; % clear workspace
 close all; % close all figure windows
-wc1=input('enter the value of cut off frequency wc1'); 
-wc2=input('enter the value of cut off frequency wc2'); 
-N=input('enter the value of filter'); 
+
+Wc1=input('enter the value of Wc1='); 
+Wc2=input('enter the value of Wc2='); 
+N=input('enter the value of N=');
+
 alpha=(N-1)/2; 
-eps=0.001; 
-%Band Pass Filter Coefficient
+eps=0.001;
+
+% Band Pass Filter
+n=0:1:N-1;
+hd=(sin(Wc2*(n-alpha+eps)) - sin(Wc1*(n-alpha+eps)))./((n-alpha+eps)*pi);
+
+% Hanning Window Sequence 
 n=0:1:N-1; 
-hd=(sin(wc1*(n-alpha+eps))-sin(wc2*(n-alpha+eps)))./((n-alpha+eps)*pi)
-%Bartlett Window Sequence 
-n=0:1:N-1; 
-wh = 1 - abs(n - alpha) / alpha;
-hn=hd.*wh
-% Plot the Band Pass Filter with Barlet Window Technique
+wh=0.5 - 0.5*cos((2*pi*n)/(N-1));
+
+% Final impulse response
+hn=hd.*wh; 
+
+% Plot the Band Pass Filter with Hanning Window Technique
 w=0:0.01:pi; 
 h=freqz(hn,1,w);
-plot(w/pi,abs(h),'blue');
+
+plot(w/pi,abs(h),'b');
+xlabel('Normalized Frequency');
+ylabel('Magnitude');
+title('Band Pass FIR Filter using Hanning Window');
+grid on;
 ~~~
 ## OUTPUT:
 
-<img width="1583" height="848" alt="Screenshot 2026-03-25 214501" src="https://github.com/user-attachments/assets/a155cc51-2fec-44a4-a4ae-8df9c6cea49f" />
-
+<img width="1601" height="871" alt="Screenshot 2026-03-29 100703" src="https://github.com/user-attachments/assets/7aeaf063-66cd-4b6d-9bae-fb40e09974ad" />
 
 ## RESULT:
 
