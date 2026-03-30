@@ -58,5 +58,5 @@ grid on;
 
 ## RESULT:
 
-Thus the design of Band pass FIR digital filter using Barlet waveforms were plotted and 
-output was verified.
+![WhatsApp Image 2026-03-30 at 2 36 27 PM](https://github.com/user-attachments/assets/ee173834-3a8a-4246-8f2b-15dc71f30d19)
+
