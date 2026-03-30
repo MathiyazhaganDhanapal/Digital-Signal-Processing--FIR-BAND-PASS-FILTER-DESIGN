@@ -1,6 +1,6 @@
-# Digital-Signal-Processing--FIR-BAND-PASS-FILTER-DESIGN
+# Digital-Signal-Processing--FIR-BAND-STOP-FILTER-DESIGN
 ## AIM:
-To generate design of Band Pass FIR digital filter using Barlet Window.
+To generate design of Band Stop FIR digital filter using Barlet Window.
 ## Software Required:
 MAT LAB R2023a.
 ## Algorithm:
@@ -20,36 +20,36 @@ Step 6: Terminate the program.
 
 ## PROGRAM: 
 ~~~
-clc; % clear screen
-clear all; % clear workspace
-close all; % close all figure windows
+clc; % clear screen 
+clear all; % clear workspace 
+close all; % close all figure windows 
 
-Wc1=input('enter the value of Wc1='); 
-Wc2=input('enter the value of Wc2='); 
-N=input('enter the value of N=');
+Wc1=input('enter the value of Wc1=');  
+Wc2=input('enter the value of Wc2=');  
+N=input('enter the value of N='); 
 
-alpha=(N-1)/2; 
-eps=0.001;
+alpha=(N-1)/2;  
+eps=0.001;  
 
-% Band Pass Filter
-n=0:1:N-1;
-hd=(sin(Wc2*(n-alpha+eps)) - sin(Wc1*(n-alpha+eps)))./((n-alpha+eps)*pi);
+% Band stop Filter Coefficient 
+n=0:1:N-1;  
+hd=(sin(pi*(n-alpha+eps)) - sin((n-alpha+eps)*Wc2) + sin((n-alpha+eps)*Wc1))./(pi*(n-alpha+eps));
 
-% Hanning Window Sequence 
-n=0:1:N-1; 
-wh=0.5 - 0.5*cos((2*pi*n)/(N-1));
+% Bartlett Window Sequence  
+n=0:1:N-1;  
+wh=1 - 2*abs(n-alpha)/(N-1);  
 
 % Final impulse response
-hn=hd.*wh; 
+hn=hd.*wh;  
 
-% Plot the Band Pass Filter with Hanning Window Technique
-w=0:0.01:pi; 
-h=freqz(hn,1,w);
+% Plot the Band stop Filter with Bartlett Window Technique 
+w=0:0.01:pi;  
+h=freqz(hn,1,w); 
 
 plot(w/pi,abs(h),'b');
 xlabel('Normalized Frequency');
 ylabel('Magnitude');
-title('Band Pass FIR Filter using Hanning Window');
+title('Band Stop FIR Filter using Bartlett Window');
 grid on;
 ~~~
 ## OUTPUT:
